@@ -1,0 +1,18 @@
+{
+  "name": "doxia-frontend",
+  "version": "1.0.0",
+  "main": "typescript/index.ts",
+  "author": "Sam Doiron",
+  "license": "AGPL-3.0",
+  "private": false,
+  "dependencies": {
+    "comlink": "^4.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.5",
+    "html-minifier-terser": "^5.1.1",
+    "clean-css-cli": "^4.3.0",
+    "rollup":  "^2.16.0",
+    "@rollup/plugin-node-resolve": "^8.0.1"
+  }
+}

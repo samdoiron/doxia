@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+gmake -f frontend-src/GNUmakefile

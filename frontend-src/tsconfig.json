@@ -1,0 +1,14 @@
+{
+  "include": ["typescript/**/*"],
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "lib": ["DOM", "ScriptHost", "ES6"],
+    "target": "ES2017",
+    "moduleResolution": "node"
+  },
+}

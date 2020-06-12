@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+while true; do
+  fd '.*' frontend-src | entr -dc scripts/frontend-build
+  sleep 1
+done

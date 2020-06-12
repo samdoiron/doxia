@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+raw_index = File.read(ARGV[0])
+css = File.read(ARGV[1])
+js = File.read(ARGV[2])
+
+File.write(ARGV[0], raw_index.gsub("{{ CSS }}", css).gsub("{{ JS }}", js))
