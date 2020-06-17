@@ -1,14 +1,16 @@
 :root {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --main-bg-color: #d9dedf;
 }
 
 * {
   position: relative;
   display: flex;
   flex-flow: column;
+  flex: 1;
   flex-shrink: 0;
-  overflow: hidden;
   box-sizing: border-box;
+  align-items: stretch;
   contain: strict;
 }
 
@@ -16,12 +18,17 @@ style, script, head { display: none; }
 
 html,
 body {
+  background: var(--main-bg-color);
   padding: 0;
   margin: 0;
   height: 100vh;
   width: 100vw;
-  align-items: center;
+  align-items: stretch;
   line-height: 1.4rem;
+}
+
+h1, p {
+  margin: 0;
 }
 
 main {
@@ -29,15 +36,94 @@ main {
   width: 960px;
 }
 
-.content-sized {
+.dynamic {
+  flex: none;
   contain: paint layout;
 }
 
-.spacer-1 { margin: 16px; }
-.spacer-2 { margin: 32px; }
-.spacer-3 { margin: 64px; }
-.spacer-4 { margin: 128px; }
 
-.lines-1 {
-  height: 1.4rem;
+/*
+ * -- Spacer  --------------------------------------------------
+ */
+
+.spacer-1 {
+  flex: 1;
+  padding: 16px;
+}
+
+.spacer-2 {
+  flex: 1;
+  padding: 32px;
+}
+
+.spacer-3 {
+  flex: 1;
+  padding: 64px;
+}
+
+.spacer-4 {
+  flex: 1;
+  padding: 128px;
+}
+
+.spacer-align-center {
+  justify-content: center;
+}
+
+/*
+ * -- Grid  --------------------------------------------------
+ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 512px);
+
+  padding: 32px;
+  grid-gap: 32px;
+
+  /* Calculated so that if there is a grid child with an internal ratio
+   * of 16:9 for its children, then the 16 child will have a 16:9 ratio
+   * to the width.
+   */
+  grid-template-rows: repeat(auto-fit, calc(225/256 * 512px));
+
+}
+
+.grid-child {
+  flex: 1;
+  box-shadow: -6px -6px 16px 0 rgba(255,255,255,.5), 6px 6px 16px rgba(172, 172, 172, 0.5);
+}
+
+/*
+ * -- Card  --------------------------------------------------
+ */
+
+
+.card {
+  position: relative;
+  background: white;
+  border-radius: 8px;
+}
+
+.card h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  padding-bottom: 8px;
+}
+
+.card-media {
+  flex: none;
+  height: calc(16/25 * 100%)
+}
+
+.card-text {
+  flex: none;
+  height: calc(9/25 * 100%);
+  justify-content: center;
+}
+
+.card-detail {
+  font-family: 'Ubuntu Mono', 'Courier New', Courier, monospace;
+  color: #333;
 }

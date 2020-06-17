@@ -1,8 +1,19 @@
-import App from './worker';
-import * as Comlink from 'comlink'
+import { render } from 'preact/compat'
+import { Provider } from 'react-redux'
+import { wrapStore } from 'redux-in-worker';
+import { html } from 'htm/preact';
 
-const app = Comlink.wrap(new Worker('worker.js')) as Comlink.Remote<App>;
+import { App } from './ui/app';
+import { initialState } from './state'
 
-(async () => {
-  console.log(await app.foo());
-})();
+const worker = new Worker('worker.js', { type: 'module' })
+const store = wrapStore(worker, initialState);
+
+render(
+  html`
+  <${Provider} store=${store}>
+    <${App} />
+  </${Provider}>
+  `,
+  document.body
+)

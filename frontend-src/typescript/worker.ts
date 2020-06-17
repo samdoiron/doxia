@@ -1,9 +1,13 @@
-import * as Comlink from 'comlink'
+import { createStore } from 'redux';
+import { exposeStore } from 'redux-in-worker'
 
-export default class App {
-  foo() {
-    return 123;
+import { State, initialState } from './state'
+import { Action } from './actions'
+
+const reducer = (state: State = initialState, action: Action): State => {
+  switch (action.type) {
   }
+  return state;
 }
 
-Comlink.expose(new App())
+exposeStore(createStore(reducer))

@@ -10,7 +10,6 @@ ifeq ($(origin .RECIPEPREFIX), undefined)
 endif
 .RECIPEPREFIX = >
 
-TSC := frontend-src/node_modules/typescript/bin/tsc -p frontend-src --pretty
 ROLLUP := frontend-src/node_modules/rollup/dist/bin/rollup \
 	-c frontend-src/rollup.config.js \
 	--environment outdir:public
@@ -45,15 +44,11 @@ public/index.html: frontend-src/index.html public/main.css public/main.js public
 public/main.css: frontend-src/.node_modules.sentinel $(shell fd . -e css frontend-src/css)
 > $(CSS_MIN) $(shell fd . -e css frontend-src/css) -o $@
 
-public/worker.js: .node_modules.sentinel .typescript.sentinel
-> $(ROLLUP) --environment 'input:_build/js/worker.js'
+public/worker.js: .node_modules.sentinel $(shell fd . -e ts frontend-src/typescript)
+> $(ROLLUP) --environment 'input:frontend-src/typescript/worker.ts'
 
-public/main.js: .node_modules.sentinel .typescript.sentinel
-> $(ROLLUP) --environment 'input:_build/js/main.js'
-
-.typescript.sentinel: $(shell fd . -e ts frontend-src/typescript)
-> mkdir -p _build/js
-> $(TSC) --outdir _build/js
+public/main.js: .node_modules.sentinel $(shell fd . -e ts frontend-src/typescript)
+> $(ROLLUP) --environment 'input:frontend-src/typescript/main.ts'
 
 .node_modules.sentinel: frontend-src/package.json
 > yarn install --cwd frontend-src
